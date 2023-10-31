@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OneStopAiTools</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1rem 0;
+        }
+
+        nav {
+            background-color: #444;
+            text-align: center;
+            padding: 0.5rem 0;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        .container {
+            padding: 20px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .content-container {
+            padding: 20px;
+        }
+
+        .buttons {
+            margin-top: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>OneStopAiTools</h1>
+    </header>
+
+    <nav>
+        <a href="/">Home</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+    </nav>
+    <div style="padding-top:10px">
+        <label for="textInput">Enter your text:</label></br>
+        <textarea id="textInput" rows="5" cols="40"></textarea>
+    </div>
+    <br>
+    <div>
+        <button id="commaToNewLineBtn">Convert Commas to New Lines</button>
+        <button id="newLineToCommaBtn">Convert New Lines to Commas</button>
+        <button id="Btnwithspace">After Commas add space</button>
+        <button id="removeSpaceBtn">After Commas remove space</button>
+    </div>
+    <br>
+    <div style="padding-bottom:50px">
+        <label for="output">Output:</label></br>
+        <textarea id="output" rows="5" cols="40" readonly></textarea>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $("#commaToNewLineBtn").on("click", function () {
+                var inputText = $("#textInput").val();
+                var sanitizedInput = encodeHTML(inputText); // Sanitize input
+                var outputText = sanitizedInput.replace(/,/g, '\n');
+                $("#output").val(outputText);
+            });
+
+            $("#newLineToCommaBtn").on("click", function () {
+                var inputText = $("#textInput").val();
+                var sanitizedInput = encodeHTML(inputText); // Sanitize input
+                var outputText = sanitizedInput.replace(/\n/g, ',');
+                $("#output").val(outputText);
+            });
+            
+            $("#Btnwithspace").on("click", function () {
+                var inputText = $("#textInput").val();
+                var sanitizedInput = encodeHTML(inputText); // Sanitize input
+                var outputText = sanitizedInput.replace(/\n/g, ', ');
+                $("#output").val(outputText);
+            });
+            
+            
+            $("#removeSpaceBtn").on("click", function () {
+                // Remove space after each comma
+                var inputText = $("#textInput").val();
+              var sanitizedInput = encodeHTML(inputText); // Sanitize input
+                var outputText = sanitizedInput.replace(/, /g, ',');
+                $("#output").val(outputText);
+            });
+            // Function to sanitize input to prevent XSS
+            function encodeHTML(input) {
+                return $('<div />').text(input).html();
+            }
+        });
+        
+
+
+    </script>
+    
+       <footer>
+        &copy; 2023 OneStopAiTools
+    </footer>
+</body>
+
+</html>

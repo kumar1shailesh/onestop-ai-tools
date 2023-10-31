@@ -90,6 +90,7 @@
         <button id="newLineToCommaBtn">Convert New Lines to Commas</button>
         <button id="Btnwithspace">After Commas add space</button>
         <button id="removeSpaceBtn">After Commas remove space</button>
+        <button id="removeEmptyLinesBtn">Remove Empty Lines Online</button>
     </div>
     <br>
     <div style="padding-bottom:50px">
@@ -128,6 +129,14 @@
                 var outputText = sanitizedInput.replace(/, /g, ',');
                 $("#output").val(outputText);
             });
+
+            $("#removeEmptyLinesBtn").on("click", function () {
+                var inputText = $("#textInput").val();
+                var sanitizedInput = encodeHTML(inputText); // Sanitize input
+                var outputText = sanitizedInput.replace(/^\s*[\r\n]/gm, ''); // Remove empty lines
+                $("#output").val(outputText);
+            });
+            
             // Function to sanitize input to prevent XSS
             function encodeHTML(input) {
                 return $('<div />').text(input).html();

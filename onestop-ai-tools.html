@@ -4,9 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="OneStop AI Tools" class="seo-meta-tag" />
+	<meta property="og:description" content="Remove Empty Lines Online, Replace comma to new line online, Replace new line to comma online, Add space after comma online, Remove space after comma online" class="seo-meta-tag" />
     <title>OneStopAiTools</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <style>
+  <style>
         * {
             margin: 0;
             padding: 0;
@@ -77,8 +79,7 @@
 
     <nav>
         <a href="/">Home</a>
-        <a href="#">About</a>
-        <a href="#">Contact</a>
+        <a href="/about-us">About</a>
     </nav>
     <div style="padding-top:10px">
         <label for="textInput">Enter your text:</label></br>
@@ -86,11 +87,12 @@
     </div>
     <br>
     <div>
-        <button id="commaToNewLineBtn">Convert Commas to New Lines</button>
-        <button id="newLineToCommaBtn">Convert New Lines to Commas</button>
-        <button id="Btnwithspace">After Commas add space</button>
-        <button id="removeSpaceBtn">After Commas remove space</button>
         <button id="removeEmptyLinesBtn">Remove Empty Lines Online</button>
+        <button id="commaToNewLineBtn">Replace comma to new line online</button>
+        <button id="newLineToCommaBtn">Replace new line to comma online</button>
+        <button id="spaceToCommaBtn">Replace space with comma online</button>
+        <button id="Btnwithspace">Add space after comma online</button>
+        <button id="removeSpaceBtn">Remove space after comma online</button>
     </div>
     <br>
     <div style="padding-bottom:50px">
@@ -114,6 +116,13 @@
                 $("#output").val(outputText);
             });
             
+            $("#spaceToCommaBtn").on("click", function () {
+                var inputText = $("#textInput").val();
+                var sanitizedInput = encodeHTML(inputText); // Sanitize input
+                var outputText = sanitizedInput.replace(/ /g, ',');
+                $("#output").val(outputText);
+            });
+            
             $("#Btnwithspace").on("click", function () {
                 var inputText = $("#textInput").val();
                 var sanitizedInput = encodeHTML(inputText); // Sanitize input
@@ -129,14 +138,13 @@
                 var outputText = sanitizedInput.replace(/, /g, ',');
                 $("#output").val(outputText);
             });
-
+            
             $("#removeEmptyLinesBtn").on("click", function () {
                 var inputText = $("#textInput").val();
                 var sanitizedInput = encodeHTML(inputText); // Sanitize input
                 var outputText = sanitizedInput.replace(/^\s*[\r\n]/gm, ''); // Remove empty lines
                 $("#output").val(outputText);
             });
-            
             // Function to sanitize input to prevent XSS
             function encodeHTML(input) {
                 return $('<div />').text(input).html();
@@ -148,7 +156,7 @@
     </script>
     
        <footer>
-        &copy; 2023 OneStopAiTools
+        &copy; OneStop AI Tools
     </footer>
 </body>
 

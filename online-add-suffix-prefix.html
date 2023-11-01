@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="OneStop AI Tools" class="seo-meta-tag" />
+	<meta property="og:description" content="online add suffix prefix" class="seo-meta-tag" />
+    <title>OneStopAiTools</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1rem 0;
+        }
+
+        nav {
+            background-color: #444;
+            text-align: center;
+            padding: 0.5rem 0;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        .container {
+            padding: 20px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .content-container {
+            padding: 20px;
+        }
+
+        .buttons {
+            margin-top: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>OneStopAiTools</h1>
+    </header>
+
+    <nav>
+        <a href="/">Home</a>
+        <a href="/about-us">About</a>
+    </nav>
+    <div style="padding-top:10px">
+        <label for="textInput">Enter your text:</label><br>
+        <textarea id="textInput" rows="5" cols="40"></textarea>
+    </div>
+    <br>
+    <div>
+        <label for="prefixInput">Prefix:</label>
+        <input type="text" id="prefixInput"><br>
+        <label for="suffixInput">Suffix:</label>
+        <input type="text" id="suffixInput"><br>
+        <button id="appendBtn">Online Append Prefix and Suffix</button>
+    </div>
+    <br>
+    <div style="padding-bottom:70px">
+        <label for="output">Output:</label><br>
+        <textarea id="output" rows="5" cols="40" readonly></textarea>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $("#appendBtn").on("click", function () {
+                var inputText = $("#textInput").val();
+                var prefix = $("#prefixInput").val();
+                var suffix = $("#suffixInput").val();
+                var lines = inputText.split('\n');
+                var outputText = "";
+
+                for (var i = 0; i < lines.length; i++) {
+                    var line = lines[i];
+                    if (line.trim() !== "") { // Ignore empty lines
+                        outputText += prefix + line + suffix + '\n';
+                    }
+                }
+
+                $("#output").val(outputText.trim());
+            });
+        });
+    </script>
+        
+    <footer>
+      &copy; OneStop AI Tools
+    </footer>
+</body>
+
+</html>

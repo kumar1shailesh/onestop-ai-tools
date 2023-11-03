@@ -48,6 +48,16 @@
 </head>
 
 <body>
+
+    <header>
+        <h1>OneStopAiTools</h1>
+    </header>
+
+    <nav>
+        <a href="/">Home</a>
+        <a href="/about-us">About</a>
+    </nav>
+
     <div class="editor-toolbar">
         <button onclick="formatText('formatBlock', 'h1')">Heading</button>
         <button onclick="formatText('bold')">Bold</button>
@@ -74,7 +84,7 @@
             document.execCommand(command, false, null);
             updateWordCount();
         }
-        }
+        
 
         function clearEditor() {
             document.getElementById('editor').innerHTML = '';

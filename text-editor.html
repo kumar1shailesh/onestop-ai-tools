@@ -25,18 +25,24 @@
         }
 
         .editor-container {
-            width: 1000%;
+            width: 80%;
             max-width: 600px;
+            height: 400px;
+            overflow-y: auto;
         }
 
         #editor {
             width: 100%;
-            height: 300px;
             font-size: 16px;
             border: 1px solid #ccc;
             padding: 10px;
             box-sizing: border-box;
             background-color: white;
+            min-height: 100%;
+        }
+
+        .word-count {
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -54,22 +60,32 @@
     <div class="editor-container">
         <div id="editor" contenteditable="true"></div>
     </div>
+    <div class="word-count" id="wordCount"></div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         function formatText(command, value = null) {
             document.execCommand('styleWithCSS', null, true);
             document.execCommand(command, false, value);
+            updateWordCount();
         }
 
         function insertList(command) {
             document.execCommand(command, false, null);
+            updateWordCount();
         }
         }
 
         function clearEditor() {
             document.getElementById('editor').innerHTML = '';
-            localStorage.removeItem("editorContent");
+            updateWordCount();
+        }
+
+        function updateWordCount() {
+            var content = document.getElementById('editor').innerText;
+            var words = content.trim().split(/\s+/).filter(Boolean).length;
+            var characters = content.length;
+            document.getElementById('wordCount').innerText = `Words: ${words} | Characters: ${characters}`;
         }
 
         // Load saved text from localStorage if available
@@ -77,9 +93,10 @@
         if (localStorage.getItem("editorContent")) {
             editor.innerHTML = localStorage.getItem("editorContent");
         }
-
-        // Save text to localStorage whenever the content changes
+        
+        // Update word count on input
         editor.addEventListener("input", function() {
+            updateWordCount();
             var content = editor.innerHTML;
             localStorage.setItem("editorContent", content);
         });
